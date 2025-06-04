@@ -1,0 +1,39 @@
+;;; Code:
+;;(use-package! org-elp
+  ;;;;:after org  ; 确保在 org-mode 加载后再加载 org-elp
+  ;;:hook (org-mode . org-elp-mode)  ; 自动在 org-mode 中启用 org-elp-mode
+  ;;:config
+  ;;;; 自定义 org-elp 的设置
+  ;;(setq org-elp-split-fraction 0.2)  ; 设置分割窗口的比例为 0.2
+  ;;(setq org-elp-buffer-name "*temp equation*")  ; 设置渲染缓冲区名称
+  ;;(setq org-elp-idle-time 0.5)  ; 设置空闲延迟时间为 0.5 秒
+  ;;;; 定义快捷键，使用 Doom 的 map! 宏
+  ;;)
+;;
+;;;; 定义快捷键，使用 Doom 的 map! 宏
+;;(map! :map org-elp-mode-map
+      ;;:leader
+      ;;:prefix ("o" . "org")
+      ;;:desc "Toggle org-elp mode" "e" #'org-elp-mode)
+
+(use-package! xenops
+  :after (org latex)
+         )
+
+;;检查是否存在main-font-size
+(if (boundp 'main-font-size)
+    (setq xenops-math-image-scale-factor (/ main-font-size 12.0))
+  (progn
+    (message "Warning: main-font-size not defined, using default value 12")
+    (setq main-font-size 12)
+    (setq xenops-math-image-scale-factor (/ main-font-size 12.0))))
+
+(add-hook 'org-mode-hook #'xenops-mode 'append)
+(add-hook 'latex-mode-hook #'xenops-mode 'append)
+(add-hook 'LaTeX-mode-hook #'xenops-mode 'append)
+
+;设置背景
+(setq org-src-block-faces '(("latex" (:background "unspecified"))))
+(provide '+eqt)
+
+;;; +eqt.el
