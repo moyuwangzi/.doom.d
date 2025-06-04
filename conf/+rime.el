@@ -7,7 +7,8 @@
 (setq rime-user-data-dir "~/.local/share/fcitx5/rime")
 ;; 样式设置
 (setq rime-show-candidate 'posframe) ;; 跟随展示
-(setq rime-posframe-style 'horizontal) ;;水平显示，垂直选vertical
+;;(setq rime-posframe-style 'horizontal) ;;水平显示，垂直选vertical
+(setq rime-posframe-style 'vertical)
 ;; 自动切换中英文
 (setq rime-disable-predicates
       '(rime-predicate-evil-mode-p

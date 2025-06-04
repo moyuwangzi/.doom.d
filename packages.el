@@ -87,3 +87,5 @@
 (package! org-fragtog)
 ;;(package! org-elp)
 (package! xenops)
+
+(package! org-superstar)

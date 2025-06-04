@@ -75,8 +75,6 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-;;==============ui
-(load! "conf/+ui.el")
 ;; change the hint order of company
 
 (after! company
@@ -88,10 +86,8 @@
 
 (setq company-backends '(:separate company-yasnippet company-capf))
 ;;
-;;(add-to-list 'load-path "~/.doom.d/conf")
+(load! "conf/+ui.el")
 ;;snippets===========
-;;(require '+aas)
-;;(require '+laas)
 (load! "conf/+aas.el")
 (load! "conf/+laas.el")
 
@@ -123,7 +119,7 @@
               ;;(add-hook 'evil-insert-state-exit-hook #'org-appear-manual-stop nil t))))
 
 ;;rime==================
-(load! "conf/+rime.ef")
+(load! "conf/+rime.el")
 ;;===========公式渲染
 (load! "conf/+eqt.el")
 ;;;;
