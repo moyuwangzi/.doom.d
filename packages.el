@@ -88,6 +88,9 @@
 ;;(package! org-elp)
 (package! xenops)
 (package! org-modern-indent
-	  :recipe (:host github :repo "jdtsmith/org-modern-indent")
-	  )
+  :recipe (:host github :repo "jdtsmith/org-modern-indent")
+  )
 (package! org-superstar)
+(package! svg-tag-mode)
+(package! org-pretty-table
+  :recipe (:host github :repo "Fuco1/org-pretty-table"))

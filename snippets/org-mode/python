@@ -3,7 +3,8 @@
 # key: python
 # uuid: python
 # --
-#+begin_src python :results output
-$1
+
+#+begin_src python :results ${1:output} ${2::var} $3 ${4::session} $5
+  $6
 #+end_src
 $0

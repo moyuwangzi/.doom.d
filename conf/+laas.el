@@ -9,16 +9,21 @@
                     :cond #'org-inside-LaTeX-fragment-p
                     ;; bind to functions!
                     ;;snippets
-                    ;;Ïmy snippets
+                    ;;my snippets
                     ";s" "\\sigma"
                     ";a" "\\alpha"
+		    "alpha" "\\alpha"
+		    "omega" "\\omega"
                     "eps" "\\varepsilon"
                     "pi" "\pi"
+		    "oo" "\infty"
+		    "oint" "\oint"
+		    "int" "\int"
                     ;; upscri downscri
                     "tp" (lambda () (interactive)
-                            (yas-expand-snippet "^{$1} $0"))
+                            (yas-expand-snippet "^{$1}$0"))
                     "td" (lambda () (interactive)
-                            (yas-expand-snippet "_{$1} $0"))
+                            (yas-expand-snippet "_{$1}$0"))
                     ;;
                     "sum" (lambda () (interactive)
                             (yas-expand-snippet "\\sum_{$1}^{$2} $0"))

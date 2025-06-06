@@ -21,12 +21,11 @@
          )
 
 ;;检查是否存在main-font-size
-(if (boundp 'main-font-size)
-    (setq xenops-math-image-scale-factor (/ main-font-size 20.0))
+(if (boundp 'my-main-font-size)
+    (setq xenops-math-image-scale-factor (/ my-main-font-size 24.0))
   (progn
     (message "Warning: main-font-size not defined, using default value 12")
-    (setq main-font-size 20)
-    (setq xenops-math-image-scale-factor (/ main-font-size 20.0))))
+    (setq xenops-math-image-scale-factor 1.0 )))
 
 ;; (add-hook 'org-mode-hook #'xenops-mode 'append)
 ;; (after! (org latex)

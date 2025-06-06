@@ -30,7 +30,4 @@
 (define-key rime-mode-map (kbd "M-j") 'rime-force-enable)
 (define-key rime-active-mode-map (kbd "M-j") 'rime-inline-ascii)
 
-;;       测试输入法傻人有傻福，傻B没有,配钥匙，三块钱一把，十块钱三把，你配几把
-
-(message "rime配置成功")
 (provide '+rime)

@@ -1,39 +1,71 @@
 ;;; conf/+star.el -*- lexical-binding: t; -*-
 
+;;|标题字体设置
+(defun my/set-org-custom-faces ()
+  "change the font size of org mode"
+  (let ((faces '((org-level-1 . 1.4)
+                 (org-level-2 . 1.3)
+                 (org-level-3 . 1.2)
+                 (org-level-4 . 1.1)
+                 (org-level-5 . 1.0)
+                 (org-level-6 . 1.0)
+                 (org-level-7 . 1.0)
+                 (org-level-8 . 1.0)
+                 ;; (org-document-info-keyword . 1.45)
+                 (org-document-title . 1.45)
+                 (org-document-info . 1.2)
+                 ;; (org-meta-line . 1.45)
+                 ;; (org-list-dt . 1.35)
+                 )))
+    (dolist (face faces)
+      (set-face-attribute (car face) nil :height (cdr face)))
+    (set-face-attribute 'org-block nil :background 'unspecified)))
+
+(defun my/refresh-org-buffer ()
+  "reflash the buffer"
+  (font-lock-flush)
+  (redisplay))
+
+(defun my/org-custom-face-setup ()
+  "..."
+  (my/set-org-custom-faces)
+  ;;
+  (run-at-time 0 nil #'my/refresh-org-buffer))
+
+;;add a hook
+(add-hook 'org-mode-hook #'my/org-custom-face-setup 100)
 
 ;; 代码块和符号美化
-;; (setq prettify-symbols-unprettify-at-point 'right-edge)
 ;; 关闭modern 包对superstar 的影响
-(setq org-modern-todo nil
-      org-modern-list nil
-      org-modern-hide-stars nil
-      org-modern-checkbox nil
-      org-modern-star nil
-      ;; org-modern-star '("☰" "☱" "☲" "☳" "☴" "☵" "☶" "☷" )
-      org-modern-block-name '("" . "")
-      ;; org-modern-timestamp nil
-      ;; org-modern-keyword '(("" . ""))
-      )
+(after! org
+  (remove-hook 'org-mode-hook #'org-modern-mode))
 
-;; (after! org
-;;   (setq org-startup-indented nil)
-;;   (remove-hook 'org-mode-hook #'org-indent-mode)
-;;   )
+;; 使用svg-tag-mode
+(load! "+svg-tag.el")
+
 ;; org-modern-indent 带缩进的modern 包
 (setq org-startup-indented t)
 (use-package! org-modern-indent
-  :config
+  :config ; add late to hook
   (add-hook 'org-mode-hook #'org-modern-indent-mode 90)
   )
+;
+(with-eval-after-load 'org-modern-indent
+  (let ((vars '((org-modern-indent-begin   . "\u250C")  ;  ⎡23A1
+                (org-modern-indent-guide   . "\u2502")  ;  ⎢23A2
+                (org-modern-indent-end     . "\u2514")))) ;⎣23A3
+    (dolist (var vars)
+      (set (car var) (cdr var))
+      (unless (eq (symbol-value (car var)) (cdr var))
+        (message "change the block style failed: %S" (car var))))))
 ;; Org-mode 钩子
 (require 'org-superstar)
 (add-hook 'org-mode-hook
           (lambda ()
-            (prettify-symbols-mode t)
+            (prettify-symbols-mode)
             (org-num-mode t)
             (org-superstar-mode t)
             ;; (org-modern-indent-mode t)
-            ;; (+org-pretty-mode t)
             ))
 
 ;;; Org-mode 相关设置
@@ -42,32 +74,25 @@
   ;; (set-face-attribute 'org-superstar-header-bullet nil :height 1.5)
   ;；(set-face-attribute 'org-superstar-leading nil :height 1.3)
   ;; )
-(setq org-superstar-headline-bullets-list '("☰" "☱" "☲" "☳" "☴" "☵" "☶" "☷" ))
+;; (setq org-superstar-headline-bullets-list '("☰" "☱" "☲" "☳" "☴" "☵" "☶" "☷" ))
+(setq org-superstar-headline-bullets-list '(#x2630 #x2631 #x2632  #x2633  #x2634  #x2635  #x2636   #x2637))
 (setq org-superstar-cycle-headline-bullets t)
 (setq org-superstar-item-bullet-alist
       '(
-        (?* . #x25C9) ; * -> 带圈圈的实心圆点
-        (?+ . #x27A4) ; + -> 立体箭头
-        (?- . #x21E2) ; - -> 虚线箭头
+        (?* . #x269D) ; * -> 25C9带圈圈的实心圆点
+        (?+ . #x27A2) ; + -> 立体箭头 27A2,27A3
+        (?- . #x25C9) ; - -> 21E2虚线箭头
         )
       )
 (setq org-ellipsis "...️")
 (setq org-superstar-leading-fallback ?\s)
-;;|标题字体设置
-(set-face-attribute 'outline-1 nil :height 1.8 )
-  (set-face-attribute 'outline-2 nil :height 1.6 )
-  (set-face-attribute 'outline-3 nil :height 1.4 )
-  (set-face-attribute 'outline-4 nil :height 1.3 )
-  (set-face-attribute 'outline-5 nil :height 1.2 )
-  (set-face-attribute 'outline-6 nil :height 1.1 )
-  (set-face-attribute 'org-document-title nil :height 2.5 :bold t)
-  (set-face-attribute 'org-document-info nil :height 1.8 :bold t)
-  (set-face-attribute 'org-document-info-keyword nil
-     :inherit 'org-document-info)
-  (set-face-attribute 'org-block nil
-    :extend t :inherit 'fixed-pitch)
-  (set-face-attribute 'org-block-begin-line nil
-                      :background (face-background 'default) :height 0.9 :inherit nil)
+
+;; table modify
+(use-package! org-pretty-table
+  :config
+  (add-hook 'org-mode-hook (lambda () (org-pretty-table-mode)))
+  (setq org-pretty-table-charset "\u250c\u2510\u2514\u2518\u252c\u2524\u2534\u251c\u253c\u2500\u2502") ;┌┐└┘┬┤┴├┼─│
+  )
 
 ;； end
 (provide '+star)

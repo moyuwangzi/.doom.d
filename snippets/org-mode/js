@@ -3,7 +3,8 @@
 # key: js
 # uuid: js
 # --
-#+begin_src js :results output
-$1
+
+#+begin_src js {1::results} {2:output}
+$3
 #+end_src
 $0

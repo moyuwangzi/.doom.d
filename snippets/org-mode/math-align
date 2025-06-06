@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: #+align* block
+# key: ali*
+# uuid: ali*
+# --
+
+\begin{align*}
+  $1
+\end{align*}
+$0

@@ -2,7 +2,8 @@
 ;;; Code:
 
 ;; Doom 主题设置
-(setq doom-theme 'doom-acario-light)
+;; (setq doom-theme 'doom-acario-light)
+(setq doom-theme 'doom-one)
 
 ;; 字体设置
 ;; 字体存在性检查函数
@@ -19,11 +20,11 @@ Returns t if the font exists, nil otherwise."
 
 ;; 定义字体名称作为全局变量
 ;; Maple Mono Normal NF CN; Sarasa Term SC Nerd
-(defvar my-en-font "Sarasa Term SC Nerd"
+(defvar my-en-font "Maple Mono Normal NF CN"
   "Default English font family.")
-(defvar my-cn-font "Sarasa Term SC Nerd"
+(defvar my-cn-font "Maple Mono Normal NF CN"
   "Default Chinese font family.")
-(defvar my-sym-font "Symbola"
+(defvar my-sym-font my-cn-font;"Symbola"
   "Default symbol font family.")
 (defvar my-main-font-size 18
   "Default font size.")
@@ -62,18 +63,48 @@ Returns t if the font exists, nil otherwise."
 )
 
 ;; 显示相对行号
-;;(setq display-line-numbers-type 'relative)
-(setq display-line-numbers-type 't)  ; nil 为关闭，t 为默认行号
+(setq display-line-numbers-type 'relative)
+;; (setq display-line-numbers-type 't)  ; nil 为关闭，t 为默认行号
 
-;; 窗口居中
-(add-to-list 'initial-frame-alist
-             '(top . 0.3))
-(add-to-list 'initial-frame-alist
-             '(left . 0.3))
+;; 窗口大小，默认上一次退出时的大小，否这最大化窗口
+(defvar saved-frame-file "~/.emacs.d/frame-size.el"
+  "File to store frame geometry settings.")
+(setq initial-frame-alist '((fullscreen . maximize-window))) ;;默认最大化
+;; 保存窗口大小到文件
+(defun save-frame-size ()
+  "Save current frame size to file (GUI only)"
+  (when (display-graphic-p)
+    (with-temp-file saved-frame-file
+      (insert (format "(setq saved-frame-width %d\n" (frame-width)))
+      (insert (format "      saved-frame-height %d\n" (frame-height)))
+      (insert (format "      saved-frame-top %d\n" (frame-parameter nil 'top)))
+      (insert (format "      saved-frame-left %d)" (frame-parameter nil 'left)))
+      (insert ";; End of file")
+      )))
 
-;; 窗口大小
-(pushnew! initial-frame-alist '(width . 100) '(height . 30))
+(defun load-frame-size ()
+  "Load the frame size from file (GUI only)."
+  (when (and (display-graphic-p)
+             (file-exists-p saved-frame-file))
+    (condition-case err
+        (progn
+          (load saved-frame-file)
+          `((width . ,saved-frame-width)
+            (height . ,saved-frame-height)
+            (top . ,saved-frame-top)
+            (left . ,saved-frame-left)))
+      (error
+       (message "Failed to load frame size: %s" err)
+       nil))))
 
+;;initial frame
+(setq initial-frame-alist (or (load-frame-size)
+                              '((fullscreen . maximized))))
+
+(unless (display-graphic-p)
+  (setq initial-frame-alist nil))
+
+(add-hook 'kill-emacs-hook 'save-frame-size)
 ;; 退出插入模式时禁用光标移动
 (setq evil-move-cursor-back nil)
 
