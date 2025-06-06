@@ -108,18 +108,21 @@
 (load! "conf/org-expose-link-markers.el")
 (after! org
   (add-hook 'org-mode-hook #'org-expose-link-markers-mode))
-;;(use-package! org-appear
-  ;;:after org
-  ;;:hook (org-mode . org-appear-mode)
-  ;;:config
-  ;;(setq org-appear-trigger 'manual)
-  ;;(add-hook 'org-mode-hook
-            ;;(lambda ()
-              ;;(add-hook 'evil-insert-state-entry-hook #'org-appear-manual-start nil t)
-              ;;(add-hook 'evil-insert-state-exit-hook #'org-appear-manual-stop nil t))))
+(use-package! org-appear
+  :after org
+  :hook (org-mode . org-appear-mode)
+  :config
+  (setq org-appear-trigger 'manual)
+  (add-hook 'org-mode-hook
+            (lambda ()
+              (add-hook 'evil-insert-state-entry-hook #'org-appear-manual-start nil t)
+              (add-hook 'evil-insert-state-exit-hook #'org-appear-manual-stop nil t))))
 
 ;;rime==================
 (load! "conf/+rime.el")
+;;============代码块运行配置
+(load! "conf/+code.el")
+ ;superstar config
+(load! "conf/+star.el")
 ;;===========公式渲染
 (load! "conf/+eqt.el")
-;;;;

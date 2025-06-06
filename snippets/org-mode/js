@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name:js src block
+# key: js
+# uuid: js
+# --
+#+begin_src js :results output
+$1
+#+end_src
+$0

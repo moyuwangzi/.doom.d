@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: cpp src block
+# uuid: cpp
+# key: cpp
+# --
+#+begin_src cpp :cmdline "-o output" :flags "-Wall" :results output
+$1
+#+end_src
+$0

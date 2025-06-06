@@ -22,18 +22,26 @@
 
 ;;检查是否存在main-font-size
 (if (boundp 'main-font-size)
-    (setq xenops-math-image-scale-factor (/ main-font-size 24.0))
+    (setq xenops-math-image-scale-factor (/ main-font-size 20.0))
   (progn
     (message "Warning: main-font-size not defined, using default value 12")
-    (setq main-font-size 12)
-    (setq xenops-math-image-scale-factor (/ main-font-size 24.0))))
+    (setq main-font-size 20)
+    (setq xenops-math-image-scale-factor (/ main-font-size 20.0))))
 
-(add-hook 'org-mode-hook #'xenops-mode 'append)
-(add-hook 'latex-mode-hook #'xenops-mode 'append)
-(add-hook 'LaTeX-mode-hook #'xenops-mode 'append)
-
-;设置背景
-(setq org-src-block-faces '(("latex" (:background "unspecified"))))
+;; (add-hook 'org-mode-hook #'xenops-mode 'append)
+;; (after! (org latex)
+;;   (add-hook 'org-mode-hook #'xenops-mode)
+;;   (add-hook 'latex-mode-hook #'xenops-mode)
+;;   (add-hook 'LaTeX-mode-hook #'xenops-mode)
+;; )
+;; 与org 的其他插件冲突似乎，加一个快捷键来手动触发吧
+(map! :leader
+      :mode (org-mode latex-mode)
+      "e e" #'xenops-mode
+      "e r" #'xenops-regenerate
+      )
+;; (remove-hook 'org-mode-hook #'xenops-mode)
+;; (remove-hook 'latex-mode-hook #'xenops-mode)
 (provide '+eqt)
 
 ;;; +eqt.el

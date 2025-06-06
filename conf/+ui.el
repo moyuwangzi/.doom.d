@@ -5,30 +5,6 @@
 (setq doom-theme 'doom-acario-light)
 
 ;; 字体设置
-;;(defun font-exists-p (font-family)
-;;  "Check if the specified font family exists in the system."
-;;  (member font-family (font-family-list)))
-
-;; (let (
-      ;; (default-font "Maple Mono Normal NF CN")
-      ;; (variable-font "Maple Mono Normal NF CN")
-      ;; (serif-font "Maple Mono Normal NF CN")
-      ;; (default-font "Sarasa Term SC Nerd")
-      ;; (variable-font "Sarasa Term SC Nerd")
-      ;; (serif-font "Sarasa Term SC Nerd")
-      ;; (default-font "Hack Nerd Font")
-      ;; (variable-font "思源黑体 CN")
-      ;; (serif-font "CodeNewRoman Nerd Font")
-  ;;     )
-  ;; (when (font-exists-p default-font)
-  ;;   (setq doom-font (font-spec :family default-font :size main-font-size :weight 'regular)))
-  ;; (when (font-exists-p variable-font)
-  ;;   (setq doom-variable-pitch-font (font-spec :family variable-font :size main-font-size :weight 'regular)))
-  ;; (when (font-exists-p serif-font)
-  ;;   (setq doom-serif-font (font-spec :family serif-font :size main-font-size :weight 'light)
-  ;;         doom-big-font (font-spec :family serif-font :size main-font-size :weight 'bold)))
-;; )
-;; 参考别人的字体设置顺序
 ;; 字体存在性检查函数
 (defvar cached-font-families nil
   "Cached list of font families to avoid repeated calls to `font-family-list`.")
@@ -42,9 +18,10 @@ Returns t if the font exists, nil otherwise."
       (member font-family cached-font-families)))
 
 ;; 定义字体名称作为全局变量
-(defvar my-en-font "Maple Mono Normal NF CN"
+;; Maple Mono Normal NF CN; Sarasa Term SC Nerd
+(defvar my-en-font "Sarasa Term SC Nerd"
   "Default English font family.")
-(defvar my-cn-font "Maple Mono Normal NF CN"
+(defvar my-cn-font "Sarasa Term SC Nerd"
   "Default Chinese font family.")
 (defvar my-sym-font "Symbola"
   "Default symbol font family.")
@@ -100,41 +77,8 @@ Returns t if the font exists, nil otherwise."
 ;; 退出插入模式时禁用光标移动
 (setq evil-move-cursor-back nil)
 
-
-;; 代码块和符号美化
-(setq prettify-symbols-alist '(("#+BEGIN_SRC" . "")
-                              ("#+END_SRC" . "†")
-                              ("#+begin_src" . "†")
-                              ("#+end_src" . "†")
-                              (">=" . "≥")
-                              ("=>" . "⇨")))
-(setq prettify-symbols-unprettify-at-point 'right-edge)
-
-;; Org-mode 钩子
-(require 'org-superstar)
-(add-hook 'org-mode-hook
-          (lambda ()
-            (prettify-symbols-mode 1)
-            (org-num-mode 1)
-            (org-superstar-mode 1)
-            ))
-
-;;; Org-mode 相关设置
-(with-eval-after-load 'org-superstar
-  (set-face-attribute 'org-superstar-item nil :height 1.2)
-  (set-face-attribute 'org-superstar-header-bullet nil :height 1.2)
-  (set-face-attribute 'org-superstar-leading nil :height 1.3))
-(setq org-superstar-headline-bullets-list '("☰" "☱" "☲" "☳" "☴" "☵" "☶" "☷" ))
-(setq org-superstar-cycle-headline-bullets nil)
-(setq org-superstar-item-bullet-alist
-      '(
-        (?* . #x25C9) ; * -> 带圈圈的实心圆点
-        (?+ . #x27A4) ; + -> 立体箭头
-        (?- . #x21E2) ; - -> 虚线箭头
-        )
-      )
-(setq org-ellipsis "⬇️")
-(setq org-superstar-leading-fallback ?\s)
+;; 软换行
+(global-visual-line-mode t)
 
 ;;; Module End
 (message "Personal UI settings have been loaded")

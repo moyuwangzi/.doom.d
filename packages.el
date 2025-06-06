@@ -87,5 +87,7 @@
 (package! org-fragtog)
 ;;(package! org-elp)
 (package! xenops)
-
+(package! org-modern-indent
+	  :recipe (:host github :repo "jdtsmith/org-modern-indent")
+	  )
 (package! org-superstar)
