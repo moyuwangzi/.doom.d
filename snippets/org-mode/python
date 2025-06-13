@@ -4,7 +4,7 @@
 # uuid: python
 # --
 
-#+begin_src python :results ${1:output} ${2::var} $3 ${4::session} $5
-  $6
+#+begin_src python :results ${1:output} $2 ${3::session} $4
+  $5
 #+end_src
 $0

@@ -126,3 +126,7 @@
 (load! "conf/+star.el")
 ;;===========公式渲染
 (load! "conf/+eqt.el")
+;;===========lsp-bridge
+(use-package! lsp-bridge
+  :config
+  (global-lsp-bridge-mode))

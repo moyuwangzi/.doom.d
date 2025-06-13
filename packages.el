@@ -85,7 +85,7 @@
 
 ;;(package! org-appear :recipe (:host github :repo "awth13/org-appear"))
 (package! org-fragtog)
-;;(package! org-elp)
+(package! org-elp)
 (package! xenops)
 (package! org-modern-indent
   :recipe (:host github :repo "jdtsmith/org-modern-indent")
@@ -94,3 +94,14 @@
 (package! svg-tag-mode)
 (package! org-pretty-table
   :recipe (:host github :repo "Fuco1/org-pretty-table"))
+
+;; lsp-bright
+(when (package! lsp-bridge
+        :recipe (:host github
+                 :repo "manateelazycat/lsp-bridge"
+                 :branch "master"
+                 :files ("*.el" "*.py" "acm" "core" "langserver" "multiserver" "resources")
+                 ;; do not perform byte compilation or native compilation for lsp-bridge
+                 :build (:not compile)))
+  (package! markdown-mode)
+  (package! yasnippet))

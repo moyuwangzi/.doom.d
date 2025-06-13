@@ -41,6 +41,19 @@
       )
 ;; (remove-hook 'org-mode-hook #'xenops-mode)
 ;; (remove-hook 'latex-mode-hook #'xenops-mode)
+
+;;(use-package! org-elp
+  ;;:config
+  ;;(setq	org-elp-idle-time 0.5
+        ;;org-elp-split-fraction 0.25
+        ;;org-elp-buffer-name "*Equation Live*"
+   ;;))
+;;;;
+;;(map! :leader
+      ;;:mode (org-mode latex-mode)
+      ;;"e w" #'org-elp-mode)
+
+
 (provide '+eqt)
 
 ;;; +eqt.el

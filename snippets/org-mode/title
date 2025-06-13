@@ -3,7 +3,10 @@
 # key: title
 # uuid: title
 # --
-#+TITLE:     ${1:untitled document}
+
+#+TITLE:$1
 #+AUTHOR:    ${2:`user-full-name`}
 #+EMAIL:     ${3:`user-mail-address`}
-#+STARTUP:   ${4:overview nonum}
+#+STARTUP:   ${4:content}
+
+$0

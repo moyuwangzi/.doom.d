@@ -110,3 +110,7 @@
 
 ;; (svg-tag-mode t)
 (add-hook 'org-mode-hook #'svg-tag-mode)
+
+(map! :leader
+      :mode (org-mode)
+      "e s" #'svg-tag-mode)
