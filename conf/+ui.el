@@ -23,9 +23,9 @@ Returns t if the font exists, nil otherwise."
 ;; Maple Mono Normal NF CN; Sarasa Term SC Nerd
 (defvar my-en-font "Maple Mono Normal NF CN"
   "Default English font family.")
-(defvar my-cn-font "Maple Mono Normal NF CN"
+(defvar my-cn-font "LXGW WenKai Mono"
   "Default Chinese font family.")
-(defvar my-sym-font my-cn-font;"Symbola"
+(defvar my-sym-font "Maple Mono Normal NF CN";my-cn-font;"Symbola"
   "Default symbol font family.")
 (defvar my-main-font-size 18
   "Default font size.")
