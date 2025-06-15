@@ -151,9 +151,6 @@
        (latex +cdlatex
               +fold
               +latexmk
-              +conda
-              +cpython
-              ;; +lsp
               )            ; writing papers in Emacs has never been so fun
        ;;lean              ; for folks with too much to prove
        ;;ledger            ; be audit you can be

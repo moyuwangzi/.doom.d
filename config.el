@@ -130,3 +130,19 @@
 (use-package! lsp-bridge
   :config
   (global-lsp-bridge-mode))
+
+;;===pdf-tools
+(setq +latex-viewers '(pdf-tools evince)) ;; AuCTeX always tries to recognize the installed PDF viewer and sets evince as the first preference. However, I'd like to use pdf-tools as my default PDF viewer
+(add-hook 'TeX-after-compilation-finished-functions
+          #'TeX-revert-document-buffer) ;; Refresh PDF buffer only after TeX compilation finishes
+;; Open PDF document with width fitted to window
+(add-hook 'pdf-view-mode-hook 'pdf-view-fit-width-to-window)
+;; 常用快捷键：'o' 打开目录大纲； 'q' 退出大纲 'b' 回退跳转前页面， 'l' 前进
+;; '+' 放大， '-' 缩小 'W' 令PDF 适应当前页宽， 'H' 适应页高， 'P' 适应屏幕， '0' 重置
+(use-package! pdf-history
+  :config
+  (define-key pdf-history-minor-mode-map "l" 'pdf-history-forward)
+  (define-key pdf-history-minor-mode-map "b" 'pdf-history-backward)
+)
+;;RefTeX 快捷管理LaTeX 引用，快捷键 'C-c )' 插入引用，在对应的选项中 'go' 可以快速到达该标签所在处， 'g?' 可以查看帮助 'u' 是去除标记 (帮助文档里面给的 'M' 是错的)， 'm' 是标记， 'x' 是把所有标记到的插入到一个引用框内
+;;'C-c )' 自动生成标签
