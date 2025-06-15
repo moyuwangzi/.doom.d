@@ -52,20 +52,21 @@
         ("\\#\\+STARTUP:" . ((lambda (tag) (svg-tag-make "Startup" :face 'org-meta-line))))
         ("\\#\\+RESULTS:" . ((lambda (tag) (svg-tag-make "output" :face 'org-meta-line))))
 
-        ("\\(\\#\\+begin_[A-Za-z]+\\)" . ((lambda (tag)
-                                          (svg-tag-make tag
-                                                        :margin 0
-                                                        :beg 8
-                                                        :inverse t
-                                                        :face 'org-block-end-line
-                                                        ))))
-        ;;
-        ("\\(\\#\\+end_[A-Za-z]+\\)" . ((lambda (tag)
-                                          (svg-tag-make tag
-                                                        :margin 0
-                                                        :beg 6
-                                                        :inverse t
-                                                        :face 'org-block-end-line))))
+        ;; Replace all <block> tags with <svg> tags
+        ;; ("\\(\\#\\+begin_[A-Za-z]+\\)" . ((lambda (tag)
+        ;;                                   (svg-tag-make tag
+        ;;                                                 :margin 0
+        ;;                                                 :beg 8
+        ;;                                                 :inverse t
+        ;;                                                 :face 'org-block-end-line
+        ;;                                                 ))))
+        ;; ;;
+        ;; ("\\(\\#\\+end_[A-Za-z]+\\)" . ((lambda (tag)
+        ;;                                   (svg-tag-make tag
+        ;;                                                 :margin 0
+        ;;                                                 :beg 6
+        ;;                                                 :inverse t
+        ;;                                                 :face 'org-block-end-line))))
         ;; Citation of the form [cite:@Knuth:1984]
         ("\\(\\[cite:@[A-Za-z]+:\\)" . ((lambda (tag)
                                           (svg-tag-make tag

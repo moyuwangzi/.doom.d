@@ -105,3 +105,5 @@
                  :build (:not compile)))
   (package! markdown-mode)
   (package! yasnippet))
+;; roam-ui
+(package! org-roam-ui)

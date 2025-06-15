@@ -32,7 +32,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+;; (setq doom-theme 'doom-one)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -40,7 +40,7 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
+(setq org-directory "~/Document/")
 
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
@@ -75,7 +75,14 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-;; change the hint order of company
+(setq user-full-name "YGZ"
+      user-mail-address "photony@qq.com")
+(setq org-noter-notes-search-path '("~/Document" )) ;;The default ~org-noter~ path is a list. Add document paths containing org-noter files.
+(setq org-noter-auto-save-last-localization t);;auto save last localization
+(setq org-noter-highlight-selected-text t) ;;选中文字后插入笔记自动高亮
+;;(global-set-key (kbd "C-c n n") 'org-noter) ;; 绑定快捷键
+;;(define-key org-noter-doc-mode-map (kbd "e") 'org-noter-insert-note)
+;; change the hint order of filesy
 
 (after! company
   (setq company-idle-delay 0.1
@@ -129,7 +136,20 @@
 ;;===========lsp-bridge
 (use-package! lsp-bridge
   :config
-  (global-lsp-bridge-mode))
+  (global-lsp-bridge-mode)
+  (setq lsp-bridge-python-command (string-trim
+                                   (shell-command-to-string "python -c \"import sys; print(sys.executable)\"")))
+  )
+
+(after! lsp-bridge
+  (after! acm
+    (define-key acm-mode-map (kbd "<tab>") nil)
+    (define-key acm-mode-map (kbd "TAB") nil)
+
+    (define-key acm-mode-map (kbd "<tab>") 'acm-select-next)
+    (define-key acm-mode-map (kbd "TAB") 'acm-select-next)
+
+    ))
 
 ;;===pdf-tools
 (setq +latex-viewers '(pdf-tools evince)) ;; AuCTeX always tries to recognize the installed PDF viewer and sets evince as the first preference. However, I'd like to use pdf-tools as my default PDF viewer
@@ -146,3 +166,26 @@
 )
 ;;RefTeX 快捷管理LaTeX 引用，快捷键 'C-c )' 插入引用，在对应的选项中 'go' 可以快速到达该标签所在处， 'g?' 可以查看帮助 'u' 是去除标记 (帮助文档里面给的 'M' 是错的)， 'm' 是标记， 'x' 是把所有标记到的插入到一个引用框内
 ;;'C-c )' 自动生成标签
+
+
+;; roam 设置
+(use-package! org-roam
+  :custom
+  (org-roam-dailies-directory "~/Document/Daily")
+  (org-roam-db-gc-threshold most-positive-fixnum) ;; 提高性能
+  )
+
+(use-package! org-roam-ui
+  :after org-roam
+  :custom
+  (org-roam-ui-sync-theme t);; 同步Emacs 主题
+  (org-roam-ui-follow t) ;; 笔记节点跟随
+  (org-roam-ui-update-on-save t)
+  )
+
+
+(map! :leader
+      :mode (org-roam-mode)
+      "n r u" #'org-roam-ui-mode
+      "n r d a" #'org-roam-dailies-map
+      )
