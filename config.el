@@ -133,6 +133,8 @@
 (load! "conf/+star.el")
 ;;===========公式渲染
 (load! "conf/+eqt.el")
+
+(load! "conf/+zot.el")
 ;;===========lsp-bridge
 (use-package! lsp-bridge
   :config
@@ -171,6 +173,7 @@
 ;; roam 设置
 (use-package! org-roam
   :custom
+  (org-roam-directory "~/Document/roam")
   (org-roam-dailies-directory "~/Document/Daily")
   (org-roam-db-gc-threshold most-positive-fixnum) ;; 提高性能
   )
@@ -187,5 +190,7 @@
 (map! :leader
       :mode (org-roam-mode)
       "n r u" #'org-roam-ui-mode
+      "n r z" #'helm-bibtex  ;; 搜索bib 文件中的文献
       "n r d a" #'org-roam-dailies-map
       )
+

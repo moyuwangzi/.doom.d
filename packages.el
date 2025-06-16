@@ -107,3 +107,5 @@
   (package! yasnippet))
 ;; roam-ui
 (package! org-roam-ui)
+(package! helm-bibtex)
+(package! org-roam-bibtex)
