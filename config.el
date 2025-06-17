@@ -190,7 +190,6 @@
 (map! :leader
       :mode (org-roam-mode)
       "n r u" #'org-roam-ui-mode
-      "n r z" #'helm-bibtex  ;; 搜索bib 文件中的文献
       "n r d a" #'org-roam-dailies-map
       )
 

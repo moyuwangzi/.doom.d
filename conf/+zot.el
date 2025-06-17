@@ -9,13 +9,16 @@
   (bibtex-completion-notes-path org_roam)
   (bibtex-completion-bibliography zot_bib)
   (bibtex-completion-library-path zot_pdf)
+  (org-cite-follow-processor 'helm-bibtex-org-cite-follow)
   )
 
 (use-package! org-roam-bibtex
   :after org-roam
   :hook (org-roam-mode . org-roam-bibtex-mode)
-  :bind (("C-c n k" . orb-insert-link) ;; 插入文件笔记
-         ("C-c n a" . orb-note-action)) ; 打开操作菜单
+  :bind (("C-c n z" . orb-insert-link) ;; 插入文件笔记
+         ("C-c n a" . orb-note-actions)) ; 打开操作菜单
+  ;; :config
+  ;; (require 'org-ref)
   :custom
   (orb-insert-interface 'helm-bibtex) ; 和上面的保持一致
   (orb-insert-link-description 'citekey) ; 插入的连接描述，默认是title
@@ -40,5 +43,11 @@
         `("r" "Zotero template" plain
                 ,ref-template
                 :target
-                (file+head "roam/${title}.org" "#+title: ${title}\n")
+                (file+head "noter/${title}.org" "#+title: ${title}\n")
                 ))
+
+(map! :leader
+      :mode (org-roam-mode)
+      "n r z" #'orb-insert-link ;; 就会根据你选择的模板新建一个org, 在这个 org 文件中启动 org-noter 就会新建一个buffer 使用noter 的东西了 org-noter 的快捷键是 SPC n e
+      "n r m" #'orb-note-action
+      )
