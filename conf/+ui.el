@@ -4,7 +4,8 @@
 ;; Doom 主题设置
 ;; (setq doom-theme 'doom-acario-light)
 ;; (setq doom-theme 'doom-one)
-(setq doom-theme 'doom-moonlight)
+;; (setq doom-theme 'doom-moonlight)
+(setq doom-theme 'tango)
 
 ;; 字体设置
 ;; 字体存在性检查函数

@@ -16,7 +16,8 @@
   :after org-roam
   :hook (org-roam-mode . org-roam-bibtex-mode)
   :bind (("C-c n z" . orb-insert-link) ;; 插入文件笔记
-         ("C-c n a" . orb-note-actions)) ; 打开操作菜单
+         ;; ("C-c ")
+         ("C-c n m" . orb-note-actions)) ; 打开操作菜单
   ;; :config
   ;; (require 'org-ref)
   :custom
@@ -30,20 +31,20 @@
 ; org-roam 笔记模板
 (setq ref-template
 (concat "#+FILETAGS: reading research \n"
-        "- tags :: %^{keywords} \n"
+        "- TAGS :: %^{keywords} \n"
         "* %^{title}\n"
         ":PROPERTIES:\n"
         ":Custom_ID: %^{citekey}\n"
         ":URL: %^{url}\n"
         ":AUTHOR: %^{author-or-editor}\n"
-        ":NOTER_DOCUMENT: ~/Document/pdfs/%^{title}.pdf\n"
+        ":NOTER_DOCUMENT: /home/ygz/Document/pdfs/%^{citekey}.pdf\n"
         ":NOTER_PAGE:\n"
         ":END:"))
 (add-to-list 'org-roam-capture-templates
         `("r" "Zotero template" plain
                 ,ref-template
                 :target
-                (file+head "noter/${title}.org" "#+title: ${title}\n")
+                (file+head "noter/${title}.org" "#+TITLE: ${title}\n")
                 ))
 
 (map! :leader

@@ -143,15 +143,13 @@
                                    (shell-command-to-string "python -c \"import sys; print(sys.executable)\"")))
   )
 
-(after! lsp-bridge
-  (after! acm
-    (define-key acm-mode-map (kbd "<tab>") nil)
-    (define-key acm-mode-map (kbd "TAB") nil)
+(after! acm
+  (define-key acm-mode-map (kbd "<tab>") nil)
+  (define-key acm-mode-map (kbd "TAB") nil)
 
-    (define-key acm-mode-map (kbd "<tab>") 'acm-select-next)
-    (define-key acm-mode-map (kbd "TAB") 'acm-select-next)
-
-    ))
+  (define-key acm-mode-map (kbd "<tab>") 'acm-select-next)
+  (define-key acm-mode-map (kbd "TAB") 'acm-select-next)
+)
 
 ;;===pdf-tools
 (setq +latex-viewers '(pdf-tools evince)) ;; AuCTeX always tries to recognize the installed PDF viewer and sets evince as the first preference. However, I'd like to use pdf-tools as my default PDF viewer
