@@ -85,8 +85,6 @@
 
 ;;(package! org-appear :recipe (:host github :repo "awth13/org-appear"))
 (package! org-fragtog)
-(package! org-elp)
-(package! xenops)
 (package! org-modern-indent
   :recipe (:host github :repo "jdtsmith/org-modern-indent")
   )
